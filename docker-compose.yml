@@ -1,0 +1,33 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./hosts:/etc/nginx/conf.d
+            - ./www:/var/www
+            - ./logs:/var/log/nginx
+        depends_on: 
+            - php
+    php:
+        build: ./images/php
+        volumes:
+            - ./www:/var/www
+#        depends_on: 
+#            - mysql
+#        links: 
+#            - mysql
+#    mysql:
+#        image: mysql
+#        environment:
+#                - MYSQL_DATABASE=veraexch_cinemabd
+#                - MYSQL_USER=veraexch_midnight
+#                - MYSQL_PASSWORD=2789206a
+#                - MYSQL_ROOT_PASSWORD=root
+#        volumes:
+#            - ./db:/var/lib/mysql
+#        ports:
+#            - "3307:3306"
+
